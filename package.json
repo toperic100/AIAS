@@ -1,1 +1,66 @@
 
+{
+  "name": "app-builder-platform",
+  "version": "1.0.0",
+  "description": "AI-powered application builder platform",
+  "private": true,
+  "workspaces": [
+    "frontend/*",
+    "backend/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend/web && npm run dev",
+    "dev:backend": "cd backend/api-gateway && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend/web && npm run build",
+    "build:backend": "npm run build:services",
+    "build:services": "npm run build:api-gateway && npm run build:nlp && npm run build:codegen",
+    "build:api-gateway": "cd backend/api-gateway && npm run build",
+    "build:nlp": "cd backend/nlp-service && npm run build",
+    "build:codegen": "cd backend/codegen-service && npm run build",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend/web && npm run test",
+    "test:backend": "npm run test:services",
+    "test:services": "npm run test:api-gateway && npm run test:nlp && npm run test:codegen",
+    "test:api-gateway": "cd backend/api-gateway && npm run test",
+    "test:nlp": "cd backend/nlp-service && npm run test",
+    "test:codegen": "cd backend/codegen-service && npm run test",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "migrate": "cd backend/api-gateway && npm run migrate",
+    "seed": "cd backend/api-gateway && npm run seed"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/app-builder-platform.git"
+  },
+  "keywords": [
+    "ai",
+    "code-generation",
+    "no-code",
+    "low-code",
+    "application-builder",
+    "claude",
+    "llm"
+  ],
+  "author": "Your Organization",
+  "license": "MIT"
+}
